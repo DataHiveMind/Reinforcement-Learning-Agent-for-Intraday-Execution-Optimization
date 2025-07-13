@@ -1,0 +1,22 @@
+
+---
+
+## 🚫 .gitignore  
+
+```gitignore
+# Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Env & secrets
+venv/
+.env
+
+# Logs & TB
+runs/
+tensorboard/
+*.log
+
+# Models
+*.pth
