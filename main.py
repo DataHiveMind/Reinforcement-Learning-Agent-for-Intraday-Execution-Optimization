@@ -26,8 +26,8 @@ def main():
 
     else:
         # load agent
-        from agent.dqn_agent import DoubleDQNAgent
-        agent = DoubleDQNAgent(state_dim=5, action_dim=5)
+        from agent.dqn_agent import DQNAgent
+        agent = DQNAgent(state_dim=5, action_dim=5)
         agent.online_net.load_state_dict(torch.load(args.model))
         if args.mode == 'eval':
             bench, slip, fill = single_run(agent, data)

@@ -3,14 +3,14 @@
 import numpy as np
 from tqdm import trange
 from env.orderbook_env import OrderBookEnv
-from agent.dqn_agent import DoubleDQNAgent
+from agent.dqn_agent import DQNAgent
 from agent.policy_agent import ActorCriticAgent
 from utils.logger import get_logger, log_metrics
 
 def train_dqn(tick_data, episodes=500, max_steps=None):
     max_steps = max_steps or len(tick_data)
     env = OrderBookEnv(tick_data, max_steps=max_steps)
-    agent = DoubleDQNAgent(state_dim=5, action_dim=env.action_space.n)
+    agent = DQNAgent(state_dim=5, action_dim=env.action_space.n)
     writer = get_logger('runs/dqn')
 
     for ep in trange(episodes, desc="Training DQN"):

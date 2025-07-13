@@ -12,16 +12,16 @@ latency simulation, double‐DQN, and quantitative risk analytics.
 - CLI modes: `train`, `eval`, `eval_mc`
 
 ## 📂 Structure
-rl_execution_optimizer/ 
-├── env/ # Latency‐aware LOB simulator 
-├── agent/ # DoubleDQN (and PG) implementations 
-├── utils/ # Metrics, logger, visualizer 
-├── train/ # Training loop with TB logging 
-├── eval/ # Single‐run & MonteCarlo backtests 
-├── main.py # Entry point 
-├── requirements.txt 
-└── README.md
 
+rl_execution_optimizer/
+├── env/ # Latency‐aware LOB simulator
+├── agent/ # DoubleDQN (and PG) implementations
+├── utils/ # Metrics, logger, visualizer
+├── train/ # Training loop with TB logging
+├── eval/ # Single‐run & MonteCarlo backtests
+├── main.py # Entry point
+├── requirements.txt
+└── README.md
 
 ## 📦 Install
 
