@@ -7,13 +7,13 @@ def single_run(agent, tick_data, target_qty=10):
     # build a fresh env if needed
     from env.orderbook_env import OrderBookEnv
     env = OrderBookEnv(tick_data, max_steps=len(tick_data))
-    state = env.reset()
+    state, _ = env.reset()
     while True:
         act = agent.select_action(state)
-        state, _, done, info = env.step(act)
+        state, reward, terminated, truncated, info = env.step(act)
         exec_prices.append(info['exec_cost'])
         exec_qty.append(info['inventory'])
-        if done: break
+        if terminated or truncated: break
 
     prices = np.array(exec_prices)
     vols   = np.diff([0]+exec_qty)

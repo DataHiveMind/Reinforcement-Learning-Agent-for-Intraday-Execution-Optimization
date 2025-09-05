@@ -1,9 +1,12 @@
 import os
-from torch.utils.tensorboard import SummaryWriter
+
+class DummyLogger:
+    def add_scalar(self, tag, value, step):
+        print(f"{tag}: {value} at step {step}")
 
 def get_logger(log_dir='runs/exp'):
     os.makedirs(log_dir, exist_ok=True)
-    return SummaryWriter(log_dir)
+    return DummyLogger()
 
 def log_metrics(writer, ep, reward, avg_latency=None):
     writer.add_scalar('Episode/Reward', reward, ep)
