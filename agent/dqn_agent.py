@@ -36,6 +36,7 @@ class DQNAgent:
         target_sync: int = 1000
     ):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.action_dim = action_dim
 
         # 1) Build and move online network
         net = DQNNetwork(state_dim, action_dim)
@@ -61,9 +62,7 @@ class DQNAgent:
     def select_action(self, state: np.ndarray) -> int:
         # Epsilon‐greedy
         if random.random() < self.epsilon:
-            # self.online_net is known to be DQNNetwork,
-            # so self.online_net.net[-1].out_features is an int
-            return random.randrange(self.online_net.net[-1].out_features)
+            return random.randrange(self.action_dim)
 
         state_v = torch.FloatTensor(state).unsqueeze(0).to(self.device)
         with torch.no_grad():
@@ -98,7 +97,7 @@ class DQNAgent:
         # Double‐DQN target
         next_actions = self.online_net(s2_v).argmax(dim=1, keepdim=True)
         next_q       = self.target_net(s2_v).gather(1, next_actions)
-        target_q     = r + self.gamma * next_q * (1 - d[non_final_mask])
+        target_q     = r[non_final_mask] + self.gamma * next_q * (1 - d[non_final_mask])
 
         full_target = torch.zeros_like(q_val).to(self.device)
         full_target[non_final_mask] = target_q.detach()

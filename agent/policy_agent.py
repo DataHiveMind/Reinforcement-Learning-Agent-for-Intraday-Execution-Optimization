@@ -90,7 +90,7 @@ class ActorCriticAgent:
         return action.item()
 
     def store_reward(self, reward):
-        self.rewards.append(torch.tensor(reward, device=self.device))
+        self.rewards.append(torch.tensor(reward, dtype=torch.float32, device=self.device))
 
     def finish_episode(self):
         """
